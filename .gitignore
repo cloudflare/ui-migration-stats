@@ -1,0 +1,5 @@
+.jest
+/coverage/
+/lib/
+/node_modules/
+/out/

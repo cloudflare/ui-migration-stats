@@ -1,0 +1,78 @@
+{
+  "name": "ui-migration-stats",
+  "version": "1.0.0",
+  "description": "Migration stats for frameworks",
+  "author": "Sachin Fernandes <sachin@cloudflare.com>",
+  "main": "./lib/stats.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudflare/ui-migration-stats"
+  },
+  "homepage": "https://github.com/cloudflare/ui-migration-stats",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "migration",
+    "statistics",
+    "stats",
+    "webpack",
+    "loc",
+    "ui",
+    "framework"
+  ],
+  "bin": {
+    "stats": "./lib/stats.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "ignore": [
+      "/example/"
+    ],
+    "minified": true,
+    "comments": false
+  },
+  "scripts": {
+    "build": "rm -rf ./lib && node_modules/babel-cli/bin/babel.js src --out-dir lib --copy-files",
+    "clean": "rm -rf .jest node_modules",
+    "cover": "jest --coverage",
+    "demo": "yarn build && node ./lib/stats --config='../example/stats-example.conf.js'",
+    "dev": "watch 'yarn build;yarn demo' ./src",
+    "dev-test": "watch 'yarn build;yarn test' ./src ./test",
+    "format": "eslint --fix ./src/stats.js ./src/stats-constants.json ./src/utils/helpers.js",
+    "lint": "eslint ./src/stats.js ./src/stats-constants.json ./src/utils/helpers.js",
+    "prepush": "yarn build && yarn test && yarn format",
+    "test": "jest"
+  },
+  "jest": {
+    "cacheDirectory": ".jest",
+    "collectCoverageFrom": [
+      "**/*.{js}",
+      "!**/node_modules/**",
+      "!**/example/**"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "directory-tree": "^1.2.1",
+    "prettyjson": "^1.2.1",
+    "sloc": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-plugin-cflint": "^1.0.0",
+    "eslint-plugin-compat": "^1.0.2",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-prettier": "^2.0.1",
+    "eslint-plugin-react": "^6.10.3",
+    "husky": "^0.13.3",
+    "jest": "^19.0.2",
+    "prettier": "^1.1.0",
+    "shelljs": "^0.7.7",
+    "watch": "^1.0.2"
+  }
+}

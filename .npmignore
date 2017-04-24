@@ -1,0 +1,7 @@
+.jest
+/coverage/
+/example/
+/node_modules/
+/out/
+/src/
+/test/
