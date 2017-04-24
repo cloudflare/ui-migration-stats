@@ -5,7 +5,7 @@ Stats for migration and code base.
 Migrating between frameworks can be hard. Having some way to quantify the migration can help with the process.
 ui-migration-stats provides the specific dependency feedback and numbers related to each your frameworks.
 
-##Example
+## Example
 
 Say you were trying to migrate from BackboneJS to ReactJS OR maybe you've already started migrating a few modules/components to ReactJS.
 You now want to see how much of your codebase is migrated and how much is still in Backbone. Additionally, you don't know if 
@@ -130,9 +130,12 @@ module.exports = config;
 | `src`    | yes       | string| none | Object that holds  framework src keys |
 | `test`    | no      | string | none| Object that holds  framework src keys |
 
-### `src` (Required), `test` (Optional) 
+### `src` (Required), `test` (Optional)
+
+| Key   | Required | Type |Default|Description |
+|-------------|----------|----------|----------|-------------|
 | `exclude`    | no      | regex | none| Regex to exclude matching files or folders |
-| `filetypes`    | no      | array | includes all files |An array of filetypes to include `[".js",".handlebars",".json"]`. Although this is not required, it is better to include file types so that `.DS_Store` and other hidden files are not included.|
+| `filetypes`    | no      | array | includes all files |An array of filetypes to include `[".js",".handlebars",".json"]`. Although this is not required, it is better to include file types so that `.DS_Store` and other hidden files are not included. |
 | `path`    | yes      | string | none| Path to the src or test directory |
 
 
@@ -148,7 +151,6 @@ module.exports = config;
 | `unconditionalLoc`    | no       | boolean | false | This option is useful when you have code written in an unrecognized language or if you have a lot of schema files. You will get a warning about skipped files if there is an unrecognized language. Use this option to add those files as pure source code i.e. ignoring comments and other language constructs. If you're confused, it's best to set this to true. |
 | `webpackStatsFile`    | no       | string | none | Path and name of webpack stats input  JSON file. If not present, it will skip webpack analysis |
 | `webpackStatsOutputFilename`    | no       | string | none | Path and name of webpack stats output  JSON file. If key is not present, it will **NOT** output a webpack stats JSON file.If directory is not present it will create one for you. |
-
 
 
 ## Generating webpack-stats.json 
