@@ -31,7 +31,7 @@ const config = {
     sort: true,
     subdirectories: false,
     unconditionalLoc: true,
-    webpackStatsFile: '../example/webpack-stats-example.json',
+    webpackStatsFile: './example/webpack-stats-example.json',
     webpackStatsOutputFilename: './out/webpack-stats-out.json'
   }
 };
