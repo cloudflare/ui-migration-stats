@@ -1,6 +1,6 @@
 {
   "name": "ui-migration-stats",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Migration stats for frameworks",
   "author": "Sachin Fernandes <sachin@cloudflare.com>",
   "main": "./lib/stats.js",
@@ -36,7 +36,7 @@
     "build": "rm -rf ./lib && node_modules/babel-cli/bin/babel.js src --out-dir lib --copy-files",
     "clean": "rm -rf .jest node_modules",
     "cover": "jest --coverage",
-    "demo": "yarn build && node ./lib/stats --config='../example/stats-example.conf.js'",
+    "demo": "yarn build && node ./lib/stats --config='./example/stats-example.conf.js'",
     "dev": "watch 'yarn build;yarn demo' ./src ./example",
     "dev-test": "watch 'yarn build;yarn test' ./src ./test",
     "format": "eslint --fix ./src/stats.js ./src/stats-constants.json ./src/utils/helpers.js",

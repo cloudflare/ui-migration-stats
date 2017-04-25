@@ -33,7 +33,10 @@ args
 
 /* ----- Config File ----- */
 // This defaults to stats.conf.js if no argument is specified
-const config = require(args.config);
+const configPath = path.isAbsolute(args.config)
+  ? args.config
+  : path.join(process.cwd(), args.config);
+const config = require(configPath);
 
 /* ----- CONSTANTS ----- */
 const CONSTANTS = require('./stats-constants.js');
@@ -64,7 +67,10 @@ const timestamp = new Date();
 // Get webpack config if it exists
 let webpackInputFile = {};
 if (options[OPTIONS_KEYS.WEBPACK_STATS]) {
-  webpackInputFile = require(options[OPTIONS_KEYS.WEBPACK_STATS]);
+  webpackInputFile = require(path.join(
+    process.cwd(),
+    options[OPTIONS_KEYS.WEBPACK_STATS]
+  ));
 }
 
 const prettyjsonOptions = {

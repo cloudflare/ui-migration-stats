@@ -12,7 +12,7 @@ const CONFIG_KEYS = CONSTANTS.CONFIG_KEYS;
 
 describe('Stats tests', function() {
   shell.rm('-r', './out');
-  shell.exec('yarn demo -- --config="../test/stats-test.conf.js"', {
+  shell.exec(`yarn demo -- --config="${__dirname}/stats-test.conf.js"`, {
     silent: true,
     async: false
   });

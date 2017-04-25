@@ -95,7 +95,8 @@ const config = {
     },
     test: {
       filetypes: ['.js', '.handlebars', '.json'],
-      path: './example/tests/'
+      path: './example/tests/',
+      includeOnly: /overview/
     }
   },
   framework2: {
@@ -106,7 +107,6 @@ const config = {
     },
     test: {
       filetypes: ['.js', '.json'],
-      includeOnly: /test/,
       path: './example/react/test/'
     }
   },
@@ -117,7 +117,7 @@ const config = {
     sort: true,
     subdirectories: false,
     unconditionalLoc: true,
-    webpackStatsFile: '../example/webpack-stats-example.json',
+    webpackStatsFile: './example/webpack-stats-example.json',
     webpackStatsOutputFilename: './out/webpack-stats-out.json'
   }
 };
@@ -140,7 +140,7 @@ module.exports = config;
 | `exclude`    | no      | regex | none| Regex to exclude matching files or folders |
 | `filetypes`    | no      | array | includes all files |An array of filetypes to include `[".js",".handlebars",".json"]`. Although this is not required, it is better to include file types so that `.DS_Store` and other hidden files are not included. |
 | `includeOnly`    | no      | regex | none| Includes only files and folders matching this regex. Useful for complex folder structures. |
-| `path`    | yes      | string | none| Path to the src or test directory |
+| `path`    | yes      | string | none| Path to the src or test directory. **NOTE** Paths are relative to cwd, unless absolute paths are provided |
 
 
 ### `options` (Optional)
@@ -154,8 +154,9 @@ module.exports = config;
 | `sort`    | no       | boolean | false | Sorts the output of `webpack-stats` by number of includes if true  |
 | `unconditionalLoc`    | no       | boolean | false | This option is useful when you have code written in an unrecognized language or if you have a lot of schema files. You will get a warning about skipped files if there is an unrecognized language. Use this option to add those files as pure source code i.e. ignoring comments and other language constructs. If you're confused, it's best to set this to true. |
 | `webpackStatsFile`    | no       | string | none | Path and name of webpack stats input  JSON file. If not present, it will skip webpack analysis |
-| `webpackStatsOutputFilename`    | no       | string | none | Path and name of webpack stats output  JSON file. If key is not present, it will **NOT** output a webpack stats JSON file.If directory is not present it will create one for you. |
+| `webpackStatsOutputFilename`    | no       | string | none | Path and name of webpack stats output  JSON file. If key is not present, it will **NOTE** output a webpack stats JSON file.If directory is not present it will create one for you. |
 
+**NOTE** All paths are relative to cwd, unless absolute paths are provided.
 
 ## Generating webpack-stats.json 
 
