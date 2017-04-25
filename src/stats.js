@@ -37,7 +37,7 @@ const configPath = path.isAbsolute(args.config)
   ? args.config
   : path.join(process.cwd(), args.config);
 const config = require(configPath);
-console.log(configPath);
+
 /* ----- CONSTANTS ----- */
 const CONSTANTS = require('./stats-constants.js');
 const CONFIG_KEYS = CONSTANTS.CONFIG_KEYS;
