@@ -1,6 +1,6 @@
 {
   "name": "ui-migration-stats",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Migration stats for frameworks",
   "author": "Sachin Fernandes <sachin@cloudflare.com>",
   "main": "./lib/stats.js",
