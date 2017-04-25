@@ -9,7 +9,8 @@ const config = {
     },
     test: {
       filetypes: ['.js', '.handlebars', '.json'],
-      path: './example/tests/'
+      path: './example/tests/',
+      includeOnly: /overview/
     }
   },
   framework2: {

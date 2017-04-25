@@ -27,8 +27,8 @@ describe('Stats tests', function() {
       });
     });
     describe('Backbone test files', function() {
-      it('It should have 3 backbone test files', function() {
-        assert.equal(3, output[CONFIG_KEYS.FRAMEWORK1][STATS_KEYS.TEST_FILES]);
+      it('It should have 2 backbone test files', function() {
+        assert.equal(2, output[CONFIG_KEYS.FRAMEWORK1][STATS_KEYS.TEST_FILES]);
       });
     });
     describe('React test files', function() {
@@ -80,17 +80,17 @@ describe('Stats tests', function() {
 
   describe('File percentage should be correct', function() {
     describe('Backbone percentage', function() {
-      it('It should be 53 percent', function() {
+      it('It should be 50 percent', function() {
         assert.equal(
-          53,
+          50,
           output[CONFIG_KEYS.FRAMEWORK1][STATS_KEYS.PERCENTAGE_FILES]
         );
       });
     });
     describe('React percentage', function() {
-      it('It should be 47 percent', function() {
+      it('It should be 50 percent', function() {
         assert.equal(
-          47,
+          50,
           output[CONFIG_KEYS.FRAMEWORK2][STATS_KEYS.PERCENTAGE_FILES]
         );
       });
@@ -116,13 +116,13 @@ describe('Stats tests', function() {
         );
         assert.deepEqual(
           {
-            total: 317,
-            source: 208,
-            comment: 64,
-            single: 64,
+            total: 133,
+            source: 91,
+            comment: 17,
+            single: 17,
             block: 0,
-            mixed: 6,
-            empty: 51,
+            mixed: 0,
+            empty: 25,
             todo: 0
           },
           output[CONFIG_KEYS.FRAMEWORK1][STATS_KEYS.TEST_LOC]
@@ -163,9 +163,9 @@ describe('Stats tests', function() {
 
   describe('LOC percentage should be correct', function() {
     describe('Backbone percentage', function() {
-      it('It should be 40 percent', function() {
+      it('It should be 29 percent', function() {
         assert.equal(
-          40,
+          29,
           output[CONFIG_KEYS.FRAMEWORK1][STATS_KEYS.PERCENTAGE_LOC]
         );
       });
@@ -173,7 +173,7 @@ describe('Stats tests', function() {
     describe('React percentage', function() {
       it('It should be 60 percent', function() {
         assert.equal(
-          60,
+          71,
           output[CONFIG_KEYS.FRAMEWORK2][STATS_KEYS.PERCENTAGE_LOC]
         );
       });
