@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cloudflare/ui-migration-stats.svg?branch=master)](https://travis-ci.org/cloudflare/ui-migration-stats)
+
 # ui-migration-stats
 
 Stats for migration and code base.
