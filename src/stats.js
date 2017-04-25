@@ -139,6 +139,9 @@ Object.keys(config).forEach(frameworkNumber => {
         let excludeRegExp =
           config[frameworkNumber][typeOfCode][CONFIG_KEYS.EXCLUDE];
 
+        // Get regex for include
+        let includeOnlyRegExp =
+          config[frameworkNumber][typeOfCode][CONFIG_KEYS.INCLUDE_ONLY];
         // Get the tree and count the total numbe of files
         // This increments the stats for the current FW and
         // its type i.e src or test
@@ -150,6 +153,14 @@ Object.keys(config).forEach(frameworkNumber => {
             if (excludeRegExp && excludeRegExp.test(item[COMMON_KEYS.PATH])) {
               return;
             }
+            // If this path does not matches the include regex then return
+            if (
+              includeOnlyRegExp &&
+              !includeOnlyRegExp.test(item[COMMON_KEYS.PATH])
+            ) {
+              return;
+            }
+
             stats[framework][type]++;
           }
         );
@@ -176,6 +187,15 @@ Object.keys(config).forEach(frameworkNumber => {
           if (excludeRegExp && excludeRegExp.test(file[COMMON_KEYS.PATH])) {
             return;
           }
+
+          // If this path does not matches the include regex then return
+          if (
+            includeOnlyRegExp &&
+            !includeOnlyRegExp.test(file[COMMON_KEYS.PATH])
+          ) {
+            return;
+          }
+
           let code = fs.readFileSync(file[COMMON_KEYS.PATH], 'utf8', function(
             err
           ) {

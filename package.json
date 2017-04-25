@@ -37,7 +37,7 @@
     "clean": "rm -rf .jest node_modules",
     "cover": "jest --coverage",
     "demo": "yarn build && node ./lib/stats --config='../example/stats-example.conf.js'",
-    "dev": "watch 'yarn build;yarn demo' ./src",
+    "dev": "watch 'yarn build;yarn demo' ./src ./example",
     "dev-test": "watch 'yarn build;yarn test' ./src ./test",
     "format": "eslint --fix ./src/stats.js ./src/stats-constants.json ./src/utils/helpers.js",
     "lint": "eslint ./src/stats.js ./src/stats-constants.json ./src/utils/helpers.js",

@@ -14,6 +14,7 @@ const constants = {
     FILETYPES: 'filetypes',
     FRAMEWORK1: 'framework1',
     FRAMEWORK2: 'framework2',
+    INCLUDE_ONLY: 'includeOnly',
     NAME: 'name',
     OPTIONS: 'options',
     OPTIONS_KEYS: {
