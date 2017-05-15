@@ -7,6 +7,8 @@ Stats for migration and code base.
 Migrating between frameworks can be hard. Having some way to quantify the migration can help with the process.
 ui-migration-stats provides the specific dependency feedback and numbers related to each your frameworks.
 
+To contribute look at [Contributing and Development](#contributing-and-development) or https://github.com/cloudflare/ui-migration-stats/blob/master/CONTRIBUTING.md
+
 ## Example
 
 Say you were trying to migrate from BackboneJS to ReactJS OR maybe you've already started migrating a few modules/components to ReactJS.
@@ -18,20 +20,16 @@ You can also consume the stats object outputs and make some pretty charts or hav
 ## Installation
 
 ```
-yarn install
-yarn build
+yarn add ui-migration-stats
+```
+Or
+```
+npm install ui-migration-stats
 ```
 
 ## Usage
 
-Run the following command to run ui-migration-stats
-```
-yarn demo
-```
-This command runs the tool on the example app found in `example`. 
-Example code is from various random open source libraries.
-
-You can also pass command line args to ui-migration-stats
+You can pass command line args to ui-migration-stats
 ```
 stats --help
 
@@ -45,30 +43,6 @@ Options:
   -S, --silent          Be silent
   -c, --config <path>   Set config path, defaults to ./stats.conf.json
 ```
-
-### Tests :)
-```
-yarn test
-```
-
-### Linting
-```
-yarn lint
-```
-You can also format your code using
-```
-yarn format
-``` 
-
-## Development tasks
-
-```sh
-yarn build # Build the lib folder
-yarn dev # Watch for changes in src and rebuild
-yarn dev-test # Watch for changes in src,test and rebuild
-yarn run clean # Delete node_modules and coverage folders
-```
-
 
 ## Configuring ui-migration-stats
 
@@ -357,3 +331,49 @@ This is what standard output json file looks like
 | `exports`    | An array of module exports |
 | `count`    |Number of times the module was included|
 | `issuers`    |  An array of paths where the module was included |
+
+
+## Contributing and Development
+
+To get started run:
+
+```sh
+git clone git@github.com:cloudflare/ui-migration-stats.git
+```
+
+or for https
+```sh
+git clone https://github.com/cloudflare/ui-migration-stats.git
+cd ui-migration-stats
+yarn install
+yarn build
+yarn demo
+```
+The demo task runs the tool on the example app found in `example`. 
+Example code is from various random open source libraries.
+
+
+## Development tasks
+
+```sh
+yarn build # Build the lib folder
+yarn dev # Watch for changes in src and rebuild
+yarn dev-test # Watch for changes in src,test and rebuild
+yarn run clean # Delete node_modules and coverage folders
+yarn lint # Run the eslint
+yarn test # Run the tests
+```
+
+### Tests :)
+```
+yarn test
+```
+
+### Linting
+```
+yarn lint
+```
+You can also format your code using
+```
+yarn format
+``` 
