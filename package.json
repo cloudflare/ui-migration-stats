@@ -68,9 +68,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-prettier": "^2.0.1",
-    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-react": "^7.0.1",
     "husky": "^0.13.3",
-    "jest": "^19.0.2",
+    "jest": "^20.0.1",
     "prettier": "^1.1.0",
     "shelljs": "^0.7.7",
     "watch": "^1.0.2"
