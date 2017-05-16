@@ -137,14 +137,17 @@ module.exports = config;
 You will need to generate your project's webpack stats file. This can be done using the webpack cli or through your webpack config.
 
 You can use the following command to generate your file
-```webpack --json > webpack-stats.json```
 
-**NOTE: If for some reason your file is empty, make sure your environment is set to production.** 
+```webpack --progress --json > webpack-stats.json```
+
+**NOTE: If for some reason your file is empty or if you're watching files in webpack, make sure your environment is set to production.** 
+Use this to set your environment to production for the json output 
+
+```NODE_ENV=production webpack --progress --json > webpack-stats.json```
 
 webpack stats config: https://webpack.js.org/configuration/stats/
 
 Empty file: http://stackoverflow.com/questions/41520410/webpack-stats-json-file-is-empty
-
 
 
 ## Output JSON
