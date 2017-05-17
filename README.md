@@ -111,7 +111,7 @@ module.exports = config;
 
 | Key   | Required | Type |Default|Description |
 |-------------|----------|----------|----------|-------------|
-| `exclude`    | no      | regex | none| Regex to exclude matching files or folders |
+| `exclude`    | no      | regex | none| Regex that excludes matching files or folders |
 | `filetypes`    | no      | array | includes all files |An array of filetypes to include `[".js",".handlebars",".json"]`. Although this is not required, it is better to include file types so that `.DS_Store` and other hidden files are not included. |
 | `includeOnly`    | no      | regex | none| Includes only files and folders matching this regex. Useful for complex folder structures. |
 | `path`    | yes      | string | none| Path to the src or test directory. **NOTE** Paths are relative to cwd, unless absolute paths are provided |

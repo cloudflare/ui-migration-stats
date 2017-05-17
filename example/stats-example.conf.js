@@ -4,11 +4,11 @@ const config = {
     name: 'Backbone',
     src: {
       exclude: /test/,
-      filetypes: ['.js', '.handlebars', '.json'],
+      filetypes: /\.js$|\.handlebars$|\.json$/,
       path: './example/javascripts/'
     },
     test: {
-      filetypes: ['.js', '.handlebars', '.json'],
+      filetypes: /\.js$|\.handlebars$|\.json$/,
       path: './example/tests/',
       includeOnly: /overview/
     }
@@ -16,11 +16,11 @@ const config = {
   framework2: {
     name: 'React',
     src: {
-      filetypes: ['.js', '.json'],
+      filetypes: /\.js$|\.json$/,
       path: './example/react/src/'
     },
     test: {
-      filetypes: ['.js', '.json'],
+      filetypes: /\.js$|\.json$/,
       path: './example/react/test/'
     }
   },

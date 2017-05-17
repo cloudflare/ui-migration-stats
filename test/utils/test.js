@@ -6,6 +6,7 @@ const {
   getChildren,
   getFolderTree,
   getPercentage,
+  ifIncludeRegExpMatches,
   ifModuleNameIncludes,
   ifPathExists,
   makeDir,
@@ -110,6 +111,15 @@ describe('Helper functions', function() {
     });
   });
 
+  describe('ifIncludeRegExpMatches', function() {
+    it('It should return true if regex matches', function() {
+      assert.equal(true, ifIncludeRegExpMatches(/\.js$/, 'somepath/test.js'));
+    });
+    it('It should return true if regex matches', function() {
+      assert.equal(false, ifIncludeRegExpMatches(/\.js$/, 'path/test.html'));
+    });
+  });
+
   describe('ifModuleNameIncludes', function() {
     it('It should return true if module name is included', function() {
       assert.equal(
@@ -129,7 +139,7 @@ describe('Helper functions', function() {
     let callbackIncrement = 0;
     let tree = getFolderTree(
       './example/javascripts/common',
-      ['.js', '.json'],
+      { extensions: /\.js$|\.json$/ },
       () => {
         callbackIncrement++;
       }
@@ -149,19 +159,23 @@ describe('Helper functions', function() {
                     path: 'example/javascripts/common/templates/locations.json',
                     name: 'locations.json',
                     size: 152,
+                    type: 'file',
                     extension: '.json'
                   }
                 ],
-                size: 152
+                size: 152,
+                type: 'directory'
               },
               {
                 path: 'example/javascripts/common/translator.js',
                 name: 'translator.js',
                 size: 563,
-                extension: '.js'
+                extension: '.js',
+                type: 'file'
               }
             ],
-            size: 715
+            size: 715,
+            type: 'directory'
           },
           tree
         );
