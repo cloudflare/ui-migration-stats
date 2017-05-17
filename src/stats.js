@@ -11,7 +11,6 @@ const {
   getChildren,
   getFolderTree,
   getPercentage,
-  ifIncludeRegExpMatches,
   ifModuleNameIncludes,
   ifPathExists,
   makeDir,
