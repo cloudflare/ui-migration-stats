@@ -67,10 +67,20 @@ const timestamp = new Date();
 // Get webpack config if it exists
 let webpackInputFile = {};
 if (options[OPTIONS_KEYS.WEBPACK_STATS]) {
-  webpackInputFile = require(path.join(
+  let webpackInputFilePath = path.join(
     process.cwd(),
     options[OPTIONS_KEYS.WEBPACK_STATS]
-  ));
+  );
+
+  // Fail if path doesnt exist
+  if (!ifPathExists(webpackInputFilePath)) {
+    print(
+      `ui-migration-stats ${chalk.red('PATH ERROR!:')} ${webpackInputFilePath} is not a valid file!`
+    );
+    process.exit(1);
+  }
+
+  webpackInputFile = require(webpackInputFilePath);
 }
 
 const prettyjsonOptions = {
