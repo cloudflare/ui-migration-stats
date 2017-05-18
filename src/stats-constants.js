@@ -1,7 +1,9 @@
 'use strict';
 const constants = {
   COMMON_KEYS: {
+    DIRECTORY: 'directory',
     EXTENSION: 'extension',
+    EXTENSIONS: 'extensions',
     LENGTH: 'length',
     LOC: 'loc',
     LOC_CAPS: 'Loc',

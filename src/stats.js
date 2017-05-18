@@ -112,15 +112,16 @@ Object.keys(config).forEach(frameworkNumber => {
   ) {
     // Traverse the subkeys of the framework
 
-    Object.keys(config[frameworkNumber]).forEach(typeOfCode => {
-      // Do this only if a typeOfCode is a src or a test
-      if (typeOfCode === CONFIG_KEYS.SRC || typeOfCode === CONFIG_KEYS.TEST) {
+    Object.keys(config[frameworkNumber]).forEach(typeOfKey => {
+      // Do this only if a typeOfKey is a src code or a test code.
+      // This prevents inclusion of other keys like name
+      if (typeOfKey === CONFIG_KEYS.SRC || typeOfKey === CONFIG_KEYS.TEST) {
         // These variables helps us figure out if
         // we're on FW1,FW2 or a test path
         let framework = CONFIG_KEYS.FRAMEWORK1;
         let type = STATS_KEYS.SRC_FILES;
         let subtype = STATS_KEYS.SRC_SUBDIRECTORY;
-        let path = config[frameworkNumber][typeOfCode][CONFIG_KEYS.PATH];
+        let path = config[frameworkNumber][typeOfKey][CONFIG_KEYS.PATH];
 
         // Fail if path doesnt exist
         if (!ifPathExists(path)) {
@@ -136,29 +137,28 @@ Object.keys(config).forEach(frameworkNumber => {
         }
 
         // If this is a test path set these types
-        if (typeOfCode === CONFIG_KEYS.TEST) {
+        if (typeOfKey === CONFIG_KEYS.TEST) {
           type = STATS_KEYS.TEST_FILES;
           subtype = STATS_KEYS.TEST_SUBDIRECTORY;
         }
 
-        // Get regex for exclude
-        let excludeRegExp =
-          config[frameworkNumber][typeOfCode][CONFIG_KEYS.EXCLUDE];
-
         // Get regex for include
         let includeOnlyRegExp =
-          config[frameworkNumber][typeOfCode][CONFIG_KEYS.INCLUDE_ONLY];
+          config[frameworkNumber][typeOfKey][CONFIG_KEYS.INCLUDE_ONLY];
         // Get the tree and count the total numbe of files
         // This increments the stats for the current FW and
         // its type i.e src or test
         let tree = getFolderTree(
           path,
-          config[frameworkNumber][typeOfCode][STATS_KEYS.FILETYPES],
+          {
+            [COMMON_KEYS.EXTENSIONS]: config[frameworkNumber][typeOfKey][
+              STATS_KEYS.FILETYPES
+            ],
+            [CONFIG_KEYS.EXCLUDE]: config[frameworkNumber][typeOfKey][
+              CONFIG_KEYS.EXCLUDE
+            ]
+          },
           item => {
-            // If this path matches the exclude regex then return
-            if (excludeRegExp && excludeRegExp.test(item[COMMON_KEYS.PATH])) {
-              return;
-            }
             // If this path does not matches the include regex then return
             if (
               includeOnlyRegExp &&
@@ -172,7 +172,15 @@ Object.keys(config).forEach(frameworkNumber => {
         );
 
         // Recursively traverse the tree
-        let subdirectoryTree = getChildren(tree, { children: [], files: [] });
+        // Excludes is handled by the directory tree plugin, we only need to handle includeOnly
+        let subdirectoryTree = getChildren(
+          tree,
+          {
+            children: [],
+            files: []
+          },
+          includeOnlyRegExp
+        );
 
         // Check if we have to do subdirectories too
         if (includeSubdirectories) {
@@ -189,19 +197,6 @@ Object.keys(config).forEach(frameworkNumber => {
         }, {});
         // For each subdirectory, get LOC
         subdirectoryTree.files.forEach(file => {
-          // Read the file and get back the contents
-          if (excludeRegExp && excludeRegExp.test(file[COMMON_KEYS.PATH])) {
-            return;
-          }
-
-          // If this path does not matches the include regex then return
-          if (
-            includeOnlyRegExp &&
-            !includeOnlyRegExp.test(file[COMMON_KEYS.PATH])
-          ) {
-            return;
-          }
-
           let code = fs.readFileSync(file[COMMON_KEYS.PATH], 'utf8', function(
             err
           ) {
@@ -241,11 +236,11 @@ Object.keys(config).forEach(frameworkNumber => {
           }
         });
         // Figure out what type of key we're attaching to stats loc object
-        let typeOfLocKey = `${typeOfCode}${[COMMON_KEYS.LOC_CAPS]}`;
+        let typeOfLocKey = `${typeOfKey}${[COMMON_KEYS.LOC_CAPS]}`;
         // Add loc to particular type
         stats[framework][typeOfLocKey] = slocStats;
       } // End IF for SRC || TEST
-    }); // End forEach typeOfCode
+    }); // End forEach typeOfKey
   } // End IF for CONFIG_KEYS.FRAMEWORK1  || CONFIG_KEYS.FRAMEWORK2
 }); // End forEach key
 

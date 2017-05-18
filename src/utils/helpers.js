@@ -14,28 +14,45 @@ const COMMON_KEYS = CONSTANTS.COMMON_KEYS;
 /** Traverses the children of a tree 
  * @param  {object} parent Object containing the children 
  * @param  {object} currentChildren Object containg the current directory tree
+ * @param  {string} includeOnlyRegExp String to match to include only certain paths
  * @return {object} currentChildren Updated object with new children added
  */
-let getChildren = (parent, currentChildren) => {
-  //If it has children, it is a directory
-  if (parent.children) {
-    //Push it into our directory array
-    currentChildren.children.push({
-      [COMMON_KEYS.PATH]: parent.path,
-      [COMMON_KEYS.LENGTH]: parent.children.length
-    });
+let getChildren = (parent, currentChildren, includeOnlyRegExp) => {
+  // Check if we should include this file/folder
+  let should_include = true;
+
+  if (
+    includeOnlyRegExp &&
+    !ifIncludeRegExpMatches(includeOnlyRegExp, parent.path)
+  ) {
+    should_include = false;
+  }
+
+  //Check if it is a directory
+  if (parent.type === COMMON_KEYS.DIRECTORY) {
+    //If we should include it, push it into our directory array
+    if (should_include) {
+      currentChildren.children.push({
+        [COMMON_KEYS.PATH]: parent.path,
+        [COMMON_KEYS.LENGTH]: parent.children.length
+      });
+    }
     // For each of it's children recurse
     parent.children.forEach(child => {
-      getChildren(child, currentChildren);
+      getChildren(child, currentChildren, includeOnlyRegExp);
     });
   } else {
-    // Else it's a file, add it to our file array
-    currentChildren.files.push({
-      [COMMON_KEYS.PATH]: parent.path,
-      //remove the . from the extension
-      [COMMON_KEYS.EXTENSION]: parent.extension.replace('.', '')
-    });
+    // Else it's a file,
+    // If we should include it, add it to our file array
+    if (should_include) {
+      currentChildren.files.push({
+        [COMMON_KEYS.PATH]: parent.path,
+        //remove the . from the extension
+        [COMMON_KEYS.EXTENSION]: parent.extension.replace('.', '')
+      });
+    }
   }
+
   return currentChildren;
 };
 
@@ -46,8 +63,8 @@ let getChildren = (parent, currentChildren) => {
  * @param  {function} callback Function to execute for each item
  * @return {object} object Tree containing the directory tree
  */
-let getFolderTree = (path, filetypes, callback) => {
-  return dirTree(path, filetypes, item => {
+let getFolderTree = (path, options, callback) => {
+  return dirTree(path, options, item => {
     callback(item);
   });
 };
@@ -61,6 +78,19 @@ let getFolderTree = (path, filetypes, callback) => {
  */
 let getPercentage = (firstValue, secondValue, total) => {
   return Math.round((firstValue + secondValue) * 100 / total);
+};
+
+/**
+ * Returns true if path matches the includeOnly Regex
+ * @param  {string} includeOnlyRegExp Regex of includeOnly
+ * @param  {string} path Path to be tested
+ * @return {boolean} True if regex matches
+ */
+let ifIncludeRegExpMatches = (includeOnlyRegExp, path) => {
+  if (includeOnlyRegExp.test(path)) {
+    return true;
+  }
+  return false;
 };
 
 /**
@@ -183,6 +213,7 @@ module.exports = {
   getChildren,
   getFolderTree,
   getPercentage,
+  ifIncludeRegExpMatches,
   ifModuleNameIncludes,
   ifPathExists,
   makeDir,

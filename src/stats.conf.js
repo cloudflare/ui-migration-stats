@@ -6,22 +6,23 @@ const config = {
     name: 'Backbone',
     src: {
       exclude: /test/,
-      filetypes: ['.js', '.handlebars', '.json'],
+      filetypes: /\.js$|\.handlebars$|\.json$/,
       path: './example/javascripts/'
     },
     test: {
-      filetypes: ['.js', '.handlebars', '.json'],
-      path: './example/tests/'
+      filetypes: /\.js$|\.handlebars$|\.json$/,
+      path: './example/tests/',
+      includeOnly: /overview/
     }
   },
   framework2: {
     name: 'React',
     src: {
-      filetypes: ['.js', '.json'],
+      filetypes: /\.js$|\.json$/,
       path: './example/react/src/'
     },
     test: {
-      filetypes: ['.js', '.json'],
+      filetypes: /\.js$|\.json$/,
       path: './example/react/test/'
     }
   },
@@ -32,11 +33,12 @@ const config = {
     sort: true,
     subdirectories: false,
     unconditionalLoc: true,
-    webpackStatsFile: '../example/webpack-stats-example.json',
+    webpackStatsFile: './example/webpack-stats-example.json',
     webpackStatsOutputFilename: './out/webpack-stats-out.json'
   }
 };
 
 module.exports = config;
+
 */
 
